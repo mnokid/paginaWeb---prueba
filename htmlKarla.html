@@ -1,0 +1,62 @@
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>So Ham Yoga</title>
+
+  <link rel="stylesheet" href="css.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css" />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js"></script>
+ </head>
+ <body>
+  <header>
+    <a href="#" class="logo-link"><img src="logo.png" alt="Logo de So Ham" height="50"></a>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Clases</a>
+      <a href="#">Horarios</a>
+      <a href="#">Instructores</a>
+      <a href="#">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+  <h2>Bienvenido a So Ham Yoga</h2>
+  <p>Descubre la paz interior y el bienestar físico con nuestras clases de yoga.</p>
+  </main>
+
+
+  <footer>
+    <div class="contact-info">
+      <span>Contacto:</span>
+      <a href="https://www.instagram.com/so_ham.tiendayterapias?igsh=dnI2NzhxNnhnbm9y" target="_blank">Instagram</a>
+      <a href="https://tiktok.com" target="_blank">TikTok</a>
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <span>| +56 (9) 9445 1163</span>
+    </div>
+    <p>© 2024 So Ham Yoga</p>
+  </footer>
+
+  <!-- Chatbot Button -->
+  <button id="chatbot-toggle-button" class="chatbot-toggle-button">
+    <img src="chat-icon.png" alt="Chat" width="30" height="30"> <!-- ¡Importante! Necesitarás una imagen para tu icono de chat (chat-icon.png) -->
+  </button>
+
+  <!-- Chatbot Container -->
+  <div id="chatbot-container" class="chatbot-container">
+    <div class="chatbot-header">
+      <h3>So Ham Asistente</h3>
+      <button class="close-chatbot-button">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="message bot-message">¡Hola! Soy tu asistente de So Ham Yoga. ¿En qué puedo ayudarte hoy?</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input-field" placeholder="Escribe tu mensaje...">
+      <button id="chatbot-send-button">Enviar</button>
+    </div>
+  </div>
+  <script src="main.js"></script>
+ </body>
+ </html>

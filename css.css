@@ -1,0 +1,867 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* --- Variables de Color y Estilos Base --- */
+:root {
+  --primary-color: #5E8B7E; /* Verde azulado suave y calmado */
+  --dark-text: #4A4A4A;      /* Gris oscuro suave para texto */
+  --light-text: #f8f9fa; /* Texto claro */
+  --background-light: #ffffff;
+  --background-grey: #FAF8F1; /* Crema muy claro para el fondo */
+  --border-color: #E0E0E0;   /* Gris claro suave para bordes */
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background-color: var(--background-grey);
+  padding-top: 80px; /* Espacio para el header fijo */
+}
+
+/* Header */
+header {
+  background-color: var(--background-light);
+  padding: 10px 5%;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%; /* 100% - 2*padding */
+  z-index: 1000;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Sombra en el header al hacer scroll */
+body.scrolled header {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Main Content */
+main {
+  padding: 20px;
+}
+
+main h2 {
+  color: var(--dark-text);
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+}
+
+main p {
+  font-size: 1.1em;
+  color: #6c6c6c; /* Un gris ligeramente más claro para el cuerpo del texto */
+}
+
+/* Footer */
+footer {
+  background-color: #4A4A4A; /* Usamos el gris oscuro del texto para el footer */
+  color: var(--light-text);
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+  transition: bottom 0.3s ease-in-out;
+  margin-top: 20px;
+}
+footer p {
+  margin: 0;
+  color: var(--light-text);
+  font-size: 0.9em;
+}
+
+/* --- Estilos para Tarjetas con información (Hover) --- */
+
+.contact-info {
+  margin-bottom: 15px;
+}
+
+.contact-info span,
+.contact-info a {
+  color: var(--background-grey);
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  vertical-align: middle;
+}
+
+.contact-info a:hover {
+  color: var(--primary-color);
+}
+
+.info-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Espacio entre tarjetas */
+  flex-wrap: wrap;
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+.info-card {
+  position: relative;
+  width: 320px;
+  height: 280px;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-10px); /* Efecto de levitación */
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+.card-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: white;
+  transition: opacity 0.5s ease;
+  z-index: 2; /* Asegura que el título esté por encima del contenido inicialmente */
+}
+
+.info-card:hover .card-title {
+  opacity: 0; /* Oculta el título al pasar el mouse */
+}
+
+.card-title h3 {
+  margin: 0;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: var(--dark-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+}
+
+.card-content h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.card-content ul {
+  padding-left: 20px;
+  text-align: left;
+}
+
+/* Estilos para el carrusel de productos */
+.products-carousel-container {
+  margin-top: 60px;
+  padding: 20px;
+  background-color: var(--background-light);
+  border-top: 1px solid var(--border-color);
+}
+
+.products-carousel-container h2 {
+  text-align: center;
+  color: var(--dark-text);
+  margin-bottom: 30px;
+}
+
+.products-carousel {
+  display: flex;
+  overflow-x: auto; /* Permite el scroll horizontal */
+  padding-bottom: 20px; /* Espacio para la barra de scroll */
+  scroll-snap-type: x mandatory; /* Hace que el scroll se detenga en cada item */
+  -webkit-overflow-scrolling: touch; /* Para un scroll más suave en iOS */
+}
+
+.product-item {
+  flex: none;
+  width: 220px;
+  margin-right: 30px;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  text-align: center;
+  background-color: var(--background-light);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  scroll-snap-align: start; /* Alinea los items al inicio del contenedor */
+}
+
+.product-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product-item p {
+  font-size: 0.9em;
+  color: #6c6c6c;
+}
+
+/*Ocultar la barra de desplazamiento en la mayoría de los navegadores */
+.products-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ocultar la barra de desplazamiento en Firefox */
+.products-carousel {
+  scrollbar-width: none;
+}
+
+/* Media Queries para Responsividad */
+
+/* Para pantallas más pequeñas (móviles, tablets) */
+@media (max-width: 768px) {
+  header {
+    padding: 10px 0;
+  }
+
+  /* Aquí podrías agregar estilos para un menú de hamburguesa en el futuro */
+  nav {
+    display: none; /* Ocultar navegación en móvil por ahora, idealmente se reemplaza con un botón */
+  }
+
+  /* Ajuste para el logo en móvil */
+  header { justify-content: center; }
+
+  nav a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* Incluir el padding en el ancho */
+  }
+
+  .info-cards-container {
+    flex-direction: column; /* Apilar las tarjetas */
+    align-items: center;
+  }
+
+  .info-card {
+    width: 90%; /* Tarjetas ocupan más ancho en pantallas pequeñas */
+    max-width: 400px;
+    margin-bottom: 20px;
+  }
+
+  .products-carousel {
+    padding-bottom: 10px;
+  }
+
+  .product-item {
+    width: 45%; /* Dos productos por fila en pantallas pequeñas */
+    min-width: 150px;
+    margin-right: 15px;
+  }
+
+  .products-carousel-container h2 {
+    font-size: 1.5em;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  footer {
+    padding: 20px;
+  }
+}
+
+/* --- Estilos para el Formulario de Autenticación --- */
+
+.auth-container {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: var(--background-light);
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: var(--dark-text);
+}
+
+.auth-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1em;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(94, 139, 126, 0.2);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #4a7a6e; /* Tono más oscuro del primario */
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #aaa;
+  margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.divider:not(:empty)::before {
+  margin-right: .5em;
+}
+
+.divider:not(:empty)::after {
+  margin-left: .5em;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #fff;
+  color: #444;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.google-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.toggle-form {
+  margin-top: 25px;
+  font-size: 0.95em;
+}
+
+.toggle-form a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toggle-form a:hover {
+  text-decoration: underline;
+}
+
+/* Ocultar formulario de registro por defecto */
+#register-form {
+  display: none;
+}
+
+/* Estilos para los filtros y mosaico de clases */
+.filters-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filters-container select {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1em;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.classes-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  padding: 40px 0;
+}
+
+.class-item {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.class-item:hover {
+  transform: scale(1.05);
+}
+
+.class-item h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.class-item p {
+  font-size: 0.9em;
+  color: #6c6c6c;
+}
+
+/* Estilos para el carrusel de instructores */
+.instructors-carousel-container {
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+.instructors-carousel {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.instructors-carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.instructor-item {
+  flex: 0 0 250px; /* No se encoge, no crece, base de 250px */
+  margin: 0 15px;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  scroll-snap-align: center; /* Centra los items al hacer scroll */
+  transition: transform 0.3s ease;
+}
+
+.instructor-item:hover {
+    transform: scale(1.05);
+}
+
+.instructor-item img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Imagen circular */
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+  margin-bottom: 15px;
+  border: 3px solid var(--primary-color);
+}
+
+.instructor-item h3 {
+  margin: 10px 0 5px 0;
+  color: var(--dark-text);
+}
+
+.instructor-item p {
+  font-size: 0.9em;
+  color: #6c6c6c;
+  line-height: 1.5;
+}
+
+/* Responsive para el carrusel de instructores */
+@media (max-width: 768px) {
+  .instructor-item {
+    flex-basis: 75%; /* Ocupa más espacio en pantallas pequeñas */
+    scroll-snap-align: start;
+  }
+  .instructors-carousel {
+      padding-left: 10px;
+  }
+}
+
+/* --- Animación para el botón del chatbot --- */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(94, 139, 126, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* --- Estilos para el Chatbot --- */
+
+/* Botón flotante del Chatbot */
+.chatbot-toggle-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary-color), #4a7a6e);
+  color: white;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1001; /* Asegura que esté por encima de otros elementos */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+.chatbot-toggle-button:hover {
+  animation-play-state: paused; /* Pausa la animación al pasar el mouse */
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(94, 139, 126, 0.4);
+}
+
+.chatbot-toggle-button img {
+  width: 32px; /* Ajustamos el tamaño del ícono */
+  height: 32px;
+  filter: brightness(0) invert(1); /* Un método más robusto para hacer el ícono blanco */
+}
+
+/* Contenedor principal del Chatbot */
+.chatbot-container {
+  position: fixed;
+  bottom: 100px; /* Se posiciona encima del botón */
+  right: 30px;
+  width: 350px;
+  height: 450px;
+  background-color: var(--background-light);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1002; /* Por encima del botón */
+  transform: translateY(100%); /* Inicialmente oculto, se desliza desde abajo */
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.chatbot-container.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Cabecera del Chatbot */
+.chatbot-header {
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chatbot-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.close-chatbot-button {
+  background: none;
+  border: none;
+  color: var(--light-text);
+  font-size: 1.5em;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Área de mensajes del Chatbot */
+.chatbot-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: var(--background-grey);
+  border-bottom: 1px solid var(--border-color);
+  display: flex; /* Para alinear los mensajes */
+  flex-direction: column; /* Para que los mensajes se apilen */
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.user-message {
+  background-color: #e0f7fa; /* Un azul claro para los mensajes del usuario */
+  align-self: flex-end; /* Alinea a la derecha */
+  margin-left: auto;
+  border-bottom-right-radius: 5px; /* Esquina inferior derecha menos redondeada */
+}
+
+.bot-message {
+  background-color: var(--background-light);
+  align-self: flex-start; /* Alinea a la izquierda */
+  margin-right: auto;
+  border-bottom-left-radius: 5px; /* Esquina inferior izquierda menos redondeada */
+}
+
+/* Burbuja de "escribiendo..." */
+.typing-indicator {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  background-color: #aaa;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 2px;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}
+
+/* Campo de entrada del Chatbot */
+.chatbot-input {
+  display: flex;
+  padding: 10px 15px;
+  border-top: 1px solid var(--border-color);
+}
+
+.chatbot-input input {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 0.9em;
+  margin-right: 10px;
+}
+
+.chatbot-input button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.chatbot-input button:hover {
+  background-color: #4a7a6e; /* Un tono ligeramente más oscuro del color primario */
+}
+
+/* Ajustes responsivos para el chatbot */
+@media (max-width: 500px) {
+  .chatbot-container {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+    height: 70vh; /* Usa la altura del viewport para mejor ajuste en móviles */
+  }
+
+  .chatbot-toggle-button {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* --- Estilos para el Modal de Detalles de Clase --- */
+
+.class-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Asegura que esté por encima de todo */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.class-modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.class-modal-content {
+  background-color: var(--background-light);
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.class-modal-overlay.visible .class-modal-content {
+  transform: scale(1);
+}
+
+.class-modal-content h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 1.8em;
+}
+
+.class-modal-content p {
+  font-size: 1.1em;
+  color: var(--dark-text);
+  margin: 10px 0;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal-btn:hover {
+  color: var(--dark-text);
+}
+
+/* --- Estilos para imagen de banner de página --- */
+.page-banner-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
